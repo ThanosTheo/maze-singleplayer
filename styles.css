@@ -1,0 +1,19 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+/* MAZE */
+
+.container
+{
+    width: 616px;
+    margin: 90px auto;
+}
+canvas{
+    border: 1px solid black
+}
