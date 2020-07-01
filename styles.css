@@ -8,12 +8,29 @@ body{
 }
 
 /* MAZE */
+.parrentContainer
+{
+    display: flex;
+    justify-content: center;
+}
 
 .container
 {
-    width: 616px;
+    display: inline-block;
     margin: 90px auto;
 }
+
+#mazeContainer
+{
+    margin-top: 20px;
+}
+
+.buttons
+{
+    display: block;
+    text-align: center;
+}
+
 canvas{
-    border: 1px solid black
+    border: 1px solid black;
 }
