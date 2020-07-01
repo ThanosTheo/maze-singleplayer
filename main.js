@@ -181,8 +181,17 @@ class Player
 
     }
     
-    draw(x,y)
+    draw(x,y, drawPath)
     {        
+        if(drawPath)
+        {
+            console.log("In")
+            context.beginPath();
+            context.rect((this.currX * gridSize), (this.currY * gridSize), gridSize,  gridSize);
+            context.fillStyle =  "#FF0000";
+            context.fill();
+        }
+
         context.beginPath();
         context.arc(this.getPosition(x+1), this.getPosition(y+1) , this.playerWidth, 0, 2 * Math.PI, false);
         context.closePath();
@@ -206,14 +215,14 @@ class Player
         return (i * gridSize) - (gridSize/2)
     }
 
-    move(dir)
+    move(dir, drawPath=false)
     {
         var  [newX,newY] = this.getNewCords(dir);
 
         if(this.validMove(newX, newY, dir))
         {
             this.clear(this.currX,this.currY);
-            this.draw(newX,newY);
+            this.draw(newX,newY, drawPath);
             this.currX = newX;
             this.currY = newY;
             this.checkWIN();
@@ -499,11 +508,11 @@ class Astar extends Player
     } ,true);
     
 
-    var i = 0;                                                 
-
+    var i = 0;
+    var display = false;
     function myLoop() {                                     
       setTimeout(function() {                              
-        player.move(astar.closedMoveList[i])             
+        player.move(astar.closedMoveList[i],display)             
         i++;                                                
         if (i < astar.closedMoveList.length) {           
           myLoop();                                     
@@ -514,6 +523,7 @@ class Astar extends Player
     document.getElementById("Solve").addEventListener("click",
     function(e)
     {
+        display = document.getElementById("displayPath").checked;
         myLoop();
     });
 })();

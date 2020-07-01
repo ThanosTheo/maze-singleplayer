@@ -17,18 +17,23 @@ body{
 .container
 {
     display: inline-block;
-    margin: 90px auto;
+    margin: 20px auto;
 }
 
 #mazeContainer
 {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .buttons
 {
     display: block;
     text-align: center;
+}
+
+.buttons button
+{
+    margin-top: 10px;
 }
 
 canvas{
