@@ -465,7 +465,7 @@ class Astar extends Player
     var player = new Player();
     
     var astar = new Astar();
-    astar.findPath()
+    astar.findPath();
 
     window.addEventListener('keydown', 
     function(e){
