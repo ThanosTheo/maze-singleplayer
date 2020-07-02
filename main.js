@@ -1,7 +1,7 @@
 // each bit represents a wall
 var BOTTOM = 0b10;
 var RIGHT = 0b01;
-var SIZE = 60;
+var SIZE = 25;
 
 // FOR DRAWING  MAZE and  PLAYER
 var canvas = document.getElementsByTagName('canvas')[0];
@@ -172,7 +172,7 @@ class Player
 {
     constructor()
     {
-        this.playerWidth = (gridSize/2)-3;
+        this.width = (gridSize/2)-3;
 
         // draw player at starting postion
         this.currX = 0;
@@ -193,7 +193,7 @@ class Player
         }
 
         context.beginPath();
-        context.arc(this.getPosition(x+1), this.getPosition(y+1) , this.playerWidth, 0, 2 * Math.PI, false);
+        context.arc(this.getPosition(x+1), this.getPosition(y+1) , this.width, 0, 2 * Math.PI, false);
         context.closePath();
         context.fillStyle =  "#009900";
         context.fill();
@@ -204,7 +204,7 @@ class Player
     clear(x,y)
     {
         context.beginPath();
-        context.arc(this.getPosition(x+1), this.getPosition(y+1) , this.playerWidth + 2, 0, 2 * Math.PI, false);
+        context.arc(this.getPosition(x+1), this.getPosition(y+1) , this.width + 2, 0, 2 * Math.PI, false);
         context.closePath();
         context.fillStyle = "#FFFFFF";
         context.fill();
@@ -497,11 +497,26 @@ class Astar extends Player
     document.getElementById("newMaze").addEventListener("click",
     function(e)
     {
+        var val = document.getElementById("cellSize").value;
+        if(val === "")
+        {
+            SIZE = 25;
+        }
+        else if(val < 3)
+        {
+            SIZE = 3;
+        }
+        else
+        {
+            SIZE = val;
+        }
+        gridSize = width / SIZE;
+
+        console.log(player.width);     
+
         maze.generatemaze();
         
-        player.currX = 0;
-        player.currY = 0;
-        player.draw(0,0);
+        player = new Player();
         
         astar = new Astar();
         astar.findPath()
@@ -512,7 +527,7 @@ class Astar extends Player
     var display = false;
     function myLoop() {                                     
       setTimeout(function() {                              
-        player.move(astar.closedMoveList[i],display)             
+        player.move(astar.closedMoveList[i],display);       
         i++;                                                
         if (i < astar.closedMoveList.length) {           
           myLoop();                                     
