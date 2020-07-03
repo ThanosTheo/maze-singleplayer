@@ -185,9 +185,8 @@ class Player
     {        
         if(drawPath)
         {
-            console.log("In")
             context.beginPath();
-            context.rect((this.currX * gridSize), (this.currY * gridSize), gridSize,  gridSize);
+            context.rect((this.currX * gridSize)+(gridSize/4), (this.currY * gridSize)+(gridSize/4),this.getPosition(1), this.getPosition(1));
             context.fillStyle =  "#FF0000";
             context.fill();
         }
@@ -532,7 +531,7 @@ class Astar extends Player
         if (i < astar.closedMoveList.length) {           
           myLoop();                                     
         }                                               
-      }, 100)
+      }, 100);
     }
 
     document.getElementById("Solve").addEventListener("click",
